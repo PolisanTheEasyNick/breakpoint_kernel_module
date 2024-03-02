@@ -1,8 +1,14 @@
 obj-m += memory.o
 
+SRC := $(shell pwd)
+
 all:
-	mkdir -p /lib/modules/$(shell uname -r)/build
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
-	depmode -a
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC)
+
+modules_install:
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC) modules_install
+
 clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	rm -f *.o *~ core .depend .*.cmd *.ko *.mod.c
+	rm -f Module.markers Module.symvers modules.order
+	rm -rf .tmp_versions Modules.symvers
