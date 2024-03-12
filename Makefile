@@ -7,8 +7,8 @@ KERNEL_SRC := /lib/modules/$(shell uname -r)/build
 endif
 
 all:
-    $(MAKE) -C $(KERNEL_SRC) M=$(SRC) modules
-    depmode -a
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC) modules
+	depmod -a
 
 clean:
-    $(MAKE) -C $(KERNEL_SRC) M=$(SRC) clean
+	$(MAKE) -C $(KERNEL_SRC) M=$(SRC) clean
